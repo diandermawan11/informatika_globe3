@@ -68,7 +68,7 @@ exports.handler = async (event) => {
 
   const emailBody = {
     from: process.env.EMAIL_FROM,
-    to: ['diandermawan10@gmail.com'],
+    to: ['diandermawan80@gmail.com'],
     subject: `Hasil Ulangan Informatika: ${name} (${kelas}) - ${score}/100`,
     text: `Hasil ulangan harian Informatika telah diterima.\n\nNama: ${name}\nKelas: ${kelas}\nNilai: ${score}/100\nBenar: ${correct}\nSalah: ${wrong}\nKosong: ${empty}\n\nFile Excel berisi ringkasan dan detail jawaban terlampir.`,
     attachments: [{ filename: fileName, content: buffer.toString('base64') }]
