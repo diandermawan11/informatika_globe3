@@ -85,7 +85,6 @@ form.addEventListener('submit',async e=>{
  const kelas=document.getElementById('student-class').value.trim();
  if(!name){document.getElementById('student-name').focus();alert('Silakan isi nama lengkap terlebih dahulu.');return}
  if(!kelas){document.getElementById('student-class').focus();alert('Silakan isi kelas terlebih dahulu.');return}
- if(localStorage.getItem('ruanguji-submitted-v1')){alert('Ujian ini sudah pernah dikumpulkan dari browser ini. Hubungi guru jika perlu mengulang.');return}
  if(Object.keys(answers).length<questions.length){const first=questions.findIndex((_,i)=>answers[i]===undefined);if(!confirm(`Masih ada ${questions.length-Object.keys(answers).length} soal yang belum dijawab. Tetap kumpulkan jawaban?`)){document.getElementById(`question-${first}`).scrollIntoView({behavior:'smooth',block:'center'});return}}
  const submitButton=form.querySelector('button[type="submit"]');
  submitButton.disabled=true;submitButton.textContent='Mengirim hasil…';
@@ -93,7 +92,6 @@ form.addEventListener('submit',async e=>{
    const response=await fetch('/.netlify/functions/submit-quiz',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,kelas,answers:Object.fromEntries(questions.map((_,i)=>[i,answers[i]===undefined?null:answers[i]]))})});
    const data=await response.json();
    if(!response.ok||!data.ok)throw new Error(data.message||'Hasil belum berhasil dikirim.');
-   localStorage.setItem('ruanguji-submitted-v1',JSON.stringify({name,kelas,score:data.score,submittedAt:data.submittedAt}));
    document.getElementById('score-number').textContent=data.score;
    document.getElementById('result-name').textContent=`${name} · Kelas ${kelas}`;
    document.getElementById('correct-count').textContent=`✓ ${data.correct} benar`;
