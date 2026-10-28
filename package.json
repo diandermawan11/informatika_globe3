@@ -1,0 +1,9 @@
+{
+  "name": "ruanguji-informatika",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website ulangan harian Informatika dengan penilaian server-side dan email Excel",
+  "dependencies": {
+    "xlsx": "^0.18.5"
+  }
+}
